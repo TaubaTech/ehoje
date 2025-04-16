@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eventos</title>
+
+  <!-- Fonte Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      color: #333;
+      padding-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 30px 0 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid #FEC223;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin: 0 auto;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .evento {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .evento:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+
+    .evento img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .info {
+      padding: 15px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .info h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: #222;
+    }
+
+    .info a {
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .info a:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-circle">
+      <img src="https://i.imgur.com/wimsEb9.jpeg" alt="E Hoje?" />
+    </div>
+  </header>
+
+  <div class="galeria" id="galeria"></div>
+
+  <script>
+    const eventos = [
+      {
+        nome: "Capitão Mor",
+        imagens: ["https://i.imgur.com/mSdqNrG.jpeg"],
+        instagram: "https://www.instagram.com/barcapitaomor?igsh=YWM3YjJieTZvaWhj"
+      },
+      {
+        nome: "Jardim Cultural",
+        imagens: ["https://i.imgur.com/fMVDbXM.jpeg"],
+        instagram: "https://www.instagram.com/ojardimcultural?igsh=MmVwdG9xYnpzdnY2"
+      },
+      {
+        nome: "The Hop",
+        imagens: [
+          "https://i.imgur.com/9sqUtIX.jpeg",
+          "https://i.imgur.com/z0nDvPt.jpeg"
+        ],
+        instagram: "https://www.instagram.com/thehopbeergarden?igsh=MTZnbXV4bTh5OTRvcw=="
+      },
+      {
+        nome: "Santo Onofre",
+        imagens: [
+          "https://i.imgur.com/fXf1Epc.jpeg",
+          "https://i.imgur.com/5lz6K3A.jpeg"
+        ],
+        instagram: "https://www.instagram.com/santonofrebar?igsh=Z3J5d2l4bHRxanVm"
+      },
+      {
+        nome: "Pink Elephant",
+        imagens: ["https://i.imgur.com/bR5NfB4.jpeg"],
+        instagram: "https://www.instagram.com/pinkelephantsjc?igsh=a2dqbmgwbDYxODl1"
+      }
+    ];
+
+    const galeria = document.getElementById("galeria");
+
+    eventos.forEach(evento => {
+      if (evento.imagens.length === 1) {
+        const card = document.createElement("div");
+        card.classList.add("evento");
+        card.innerHTML = `
+          <img src="${evento.imagens[0]}" alt="${evento.nome}">
+          <div class="info">
+            <h2>${evento.nome}</h2>
+            <a href="${evento.instagram}" target="_blank">Instagram</a>
+          </div>
+        `;
+        galeria.appendChild(card);
+      } else {
+        evento.imagens.forEach(img => {
+          const card = document.createElement("div");
+          card.classList.add("evento");
+          card.innerHTML = `
+            <img src="${img}" alt="${evento.nome}">
+            <div class="info">
+              <h2>${evento.nome}</h2>
+              <a href="${evento.instagram}" target="_blank">Instagram</a>
+            </div>
+          `;
+          galeria.appendChild(card);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
