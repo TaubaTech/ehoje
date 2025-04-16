@@ -271,7 +271,7 @@
               </div>
             `;
           } else {
-            const imagensHTML = evento.imagens.map(url => <img src="${url}" alt="${evento.nome}">).join('');
+            const imagensHTML = evento.imagens.map(url => `<img src="${url}" alt="${evento.nome}">`).join('');
             card.innerHTML = `
               <div class="carousel" data-index="${index}">
                 <div class="carousel-images">${imagensHTML}</div>
