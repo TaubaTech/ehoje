@@ -4,11 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Eventos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Fonte Outfit + Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       background: #ffffff;
       color: #333;
       padding-bottom: 40px;
@@ -43,16 +51,37 @@
       gap: 15px;
       margin: 20px 0;
       flex-wrap: wrap;
+      z-index: 2;
+      position: relative;
     }
 
     .filtros select {
-      padding: 10px 15px;
-      border: 2px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-      background: #f9f9f9;
-      font-family: 'Poppins', sans-serif;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 12px 36px 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #FEC223;
+      color: #fff;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
       cursor: pointer;
+    }
+
+    .filtros select:hover {
+      background-color: #e9b10f;
+    }
+
+    .filtros select:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #FEC22355;
     }
 
     .galeria {
@@ -84,25 +113,16 @@
     }
 
     .carousel-images {
-      position: relative;
-      height: 100%;
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
     }
 
     .carousel-images img {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: auto;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      flex-shrink: 0;
       object-fit: cover;
-    }
-
-    .carousel-images img.active {
-      opacity: 1;
-      position: relative;
-      z-index: 1;
     }
 
     .carousel-button {
@@ -114,30 +134,15 @@
       border: none;
       padding: 10px;
       cursor: pointer;
-      z-index: 2;
+      z-index: 1;
     }
 
-    .carousel-button.prev { left: 10px; }
-    .carousel-button.next { right: 10px; }
-
-    .carousel-indicators {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
+    .carousel-button.prev {
+      left: 10px;
     }
 
-    .carousel-indicators span {
-      height: 10px;
-      width: 10px;
-      background-color: #ccc;
-      border-radius: 50%;
-      display: inline-block;
-      margin: 0 5px;
-      transition: background-color 0.3s;
-    }
-
-    .carousel-indicators span.active {
-      background-color: #333;
+    .carousel-button.next {
+      right: 10px;
     }
 
     .info {
@@ -154,18 +159,29 @@
     }
 
     .info a {
-      display: inline-block;
-      background: #000;
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #FEC223, #F99C2A);
       color: #fff;
-      padding: 8px 14px;
-      border-radius: 5px;
+      padding: 12px 20px;
+      border-radius: 50px;
       text-decoration: none;
       font-size: 14px;
-      transition: background 0.3s;
+      font-weight: 500;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .info a:hover {
-      background: #333;
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #F99C2A, #FEC223);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .info a svg {
+      margin-right: 8px;
+      width: 18px;
+      height: 18px;
     }
   </style>
 </head>
@@ -183,6 +199,7 @@
       <option value="bar">Bares</option>
       <option value="balada">Baladas</option>
     </select>
+
     <select id="filtroCidade">
       <option value="todas">Todas as Cidades</option>
       <option value="taubate">Taubaté</option>
@@ -277,7 +294,7 @@
             card.innerHTML = `
               <div class="carousel">
                 <div class="carousel-images">
-                  <img src="${evento.imagens[0]}" alt="${evento.nome}" class="active">
+                  <img src="${evento.imagens[0]}" alt="${evento.nome}">
                 </div>
               </div>
               <div class="info">
@@ -286,19 +303,12 @@
               </div>
             `;
           } else {
-            const imagensHTML = evento.imagens.map((url, i) =>
-              `<img src="${url}" alt="${evento.nome}" class="${i === 0 ? 'active' : ''}">`
-            ).join('');
-            const indicadores = evento.imagens.map((_, i) =>
-              `<span class="${i === 0 ? 'active' : ''}" data-index="${i}"></span>`
-            ).join('');
-
+            const imagensHTML = evento.imagens.map(url => `<img src="${url}" alt="${evento.nome}">`).join('');
             card.innerHTML = `
               <div class="carousel" data-index="${index}">
                 <div class="carousel-images">${imagensHTML}</div>
                 <button class="carousel-button prev">&#10094;</button>
                 <button class="carousel-button next">&#10095;</button>
-                <div class="carousel-indicators">${indicadores}</div>
               </div>
               <div class="info">
                 <h2>${evento.nome}</h2>
@@ -312,43 +322,32 @@
       });
 
       document.querySelectorAll('.carousel').forEach(carousel => {
-        const images = carousel.querySelectorAll('.carousel-images img');
-        const indicators = carousel.querySelectorAll('.carousel-indicators span');
+        const imagesContainer = carousel.querySelector('.carousel-images');
+        const total = imagesContainer.children.length;
+        let currentIndex = 0;
+
+        if (total <= 1) return;
+
+        const updateCarousel = () => {
+          imagesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
+
         const prevBtn = carousel.querySelector('.prev');
         const nextBtn = carousel.querySelector('.next');
-        let current = 0;
-
-        function updateCarousel() {
-          images.forEach((img, i) => img.classList.toggle('active', i === current));
-          indicators.forEach((dot, i) => dot.classList.toggle('active', i === current));
-        }
 
         if (prevBtn && nextBtn) {
-          prevBtn.onclick = () => {
-            current = (current - 1 + images.length) % images.length;
+          prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + total) % total;
             updateCarousel();
-          };
-          nextBtn.onclick = () => {
-            current = (current + 1) % images.length;
+          });
+
+          nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % total;
             updateCarousel();
-          };
+          });
         }
 
-        indicators.forEach(dot => {
-          dot.onclick = () => {
-            current = parseInt(dot.dataset.index);
-            updateCarousel();
-          };
-        });
-
-        // Swipe
-        let startX = 0;
-        carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-        carousel.addEventListener('touchend', e => {
-          const endX = e.changedTouches[0].clientX;
-          if (endX - startX > 50) prevBtn.click();
-          else if (startX - endX > 50) nextBtn.click();
-        });
+        updateCarousel();
       });
     }
 
