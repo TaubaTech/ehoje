@@ -1,3 +1,6 @@
+<!-- CÓDIGO COMPLETO ATUALIZADO -->
+<!-- Checkpoint com Arena Por Do Sol e Pé Na Areia adicionados (categoria: beach, cidade: sanja) -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -64,10 +67,6 @@
       transform: translateY(-3px);
       background: linear-gradient(135deg, #F99C2A, #FEC223);
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
-    }
-
-    .filtros select::-ms-expand {
-      display: none;
     }
 
     .galeria {
@@ -164,8 +163,9 @@
     .info h2 {
       font-size: 1.2rem;
       margin-bottom: 10px;
-      font-weight: 500;
+      font-weight: 700;
       color: #222;
+      text-transform: uppercase;
     }
 
     .info a {
@@ -187,12 +187,6 @@
       background: linear-gradient(135deg, #F99C2A, #FEC223);
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
     }
-
-    .info a svg {
-      margin-right: 8px;
-      width: 18px;
-      height: 18px;
-    }
   </style>
 </head>
 <body>
@@ -208,6 +202,7 @@
       <option value="todos">Todos os Tipos</option>
       <option value="bar">Bares</option>
       <option value="balada">Baladas</option>
+      <option value="beach">Beach</option>
     </select>
     <select id="filtroCidade">
       <option value="todas">Todas as Cidades</option>
@@ -237,20 +232,14 @@
       },
       {
         nome: "The Hop",
-        imagens: [
-          "https://i.imgur.com/9sqUtIX.jpeg",
-          "https://i.imgur.com/z0nDvPt.jpeg"
-        ],
+        imagens: ["https://i.imgur.com/9sqUtIX.jpeg", "https://i.imgur.com/z0nDvPt.jpeg"],
         instagram: "https://www.instagram.com/thehopbeergarden?igsh=MTZnbXV4bTh5OTRvcw==",
         tipo: "bar",
         cidade: "pinda"
       },
       {
         nome: "Santo Onofre",
-        imagens: [
-          "https://i.imgur.com/fXf1Epc.jpeg",
-          "https://i.imgur.com/5lz6K3A.jpeg"
-        ],
+        imagens: ["https://i.imgur.com/fXf1Epc.jpeg", "https://i.imgur.com/5lz6K3A.jpeg"],
         instagram: "https://www.instagram.com/santonofrebar?igsh=Z3J5d2l4bHRxanVm",
         tipo: "balada",
         cidade: "sanja"
@@ -271,14 +260,24 @@
       },
       {
         nome: "Jeca",
-        imagens: [
-          "https://i.imgur.com/SBHapLE.jpeg",
-          "https://i.imgur.com/cn24Ovq.jpeg",
-          "https://i.imgur.com/4UtzXzv.jpeg"
-        ],
+        imagens: ["https://i.imgur.com/SBHapLE.jpeg", "https://i.imgur.com/cn24Ovq.jpeg", "https://i.imgur.com/4UtzXzv.jpeg"],
         instagram: "https://www.instagram.com/jecataubate?igsh=ZWY2eWRjcGlrM2Fo",
         tipo: "bar",
         cidade: "taubate"
+      },
+      {
+        nome: "Arena Por Do Sol",
+        imagens: ["https://i.imgur.com/WV8IACx.jpeg"],
+        instagram: "https://www.instagram.com/arenapordosolsjc?igsh=MXU4emlmenZ0Z2M3Nw==",
+        tipo: "beach",
+        cidade: "sanja"
+      },
+      {
+        nome: "Pé Na Areia",
+        imagens: ["https://i.imgur.com/MZbFbnS.jpeg", "https://i.imgur.com/Si7lLyH.jpeg"],
+        instagram: "https://www.instagram.com/penaareiasports?igsh=MWpucXE4NHZlenJlOQ==",
+        tipo: "beach",
+        cidade: "sanja"
       }
     ];
 
