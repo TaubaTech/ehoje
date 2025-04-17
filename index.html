@@ -289,7 +289,6 @@
         }
       });
 
-      // Ativar carrosséis
       document.querySelectorAll('.carousel').forEach(carousel => {
         const imagesContainer = carousel.querySelector('.carousel-images');
         const total = imagesContainer.children.length;
@@ -298,7 +297,7 @@
         if (total <= 1) return;
 
         const updateCarousel = () => {
-          imagesContainer.style.transform = translateX(-${currentIndex * 100}%);
+          imagesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
         };
 
         const prevBtn = carousel.querySelector('.prev');
