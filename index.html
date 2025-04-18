@@ -1,5 +1,5 @@
 <!-- CÓDIGO COMPLETO ATUALIZADO -->
-<!-- Checkpoint com Arena Por Do Sol e Pé Na Areia adicionados (categoria: beach, cidade: sanja) -->
+<!-- Checkpoint com filtro por lugar (nome do evento) adicionado -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -210,6 +210,9 @@
       <option value="sanja">Sanja</option>
       <option value="pinda">Pinda</option>
     </select>
+    <select id="filtroLugar">
+      <option value="todos">Todos os Lugares</option>
+    </select>
   </div>
 
   <div class="galeria" id="galeria"></div>
@@ -273,20 +276,6 @@
         cidade: "sanja"
       },
       {
-        nome: "GUTEN BIER",
-        imagens: ["https://i.imgur.com/Mql2ELx.jpeg", "https://i.imgur.com/o31m4SJ.jpeg"],
-        instagram: "https://www.instagram.com/gutenbieroficial?igsh=MTNoeWlmZGpuZ29scQ==",
-        tipo: "balada",
-        cidade: "sanja"
-      },
-      {
-  nome: "Honey Club",
-  imagens: ["https://i.imgur.com/B0db4uL.jpeg"],
-  instagram: "https://www.instagram.com/honeyclubsjc?igsh=OW01MnRlZHJhcWFy",
-  tipo: "balada",
-  cidade: "sanja"  
-      },
-      {
         nome: "Pé Na Areia",
         imagens: ["https://i.imgur.com/MZbFbnS.jpeg", "https://i.imgur.com/Si7lLyH.jpeg"],
         instagram: "https://www.instagram.com/penaareiasports?igsh=MWpucXE4NHZlenJlOQ==",
@@ -298,16 +287,29 @@
     const galeria = document.getElementById("galeria");
     const filtroTipo = document.getElementById("filtroTipo");
     const filtroCidade = document.getElementById("filtroCidade");
+    const filtroLugar = document.getElementById("filtroLugar");
+
+    function popularFiltroLugar() {
+      const nomesUnicos = [...new Set(eventos.map(e => e.nome))].sort();
+      nomesUnicos.forEach(nome => {
+        const opt = document.createElement("option");
+        opt.value = nome;
+        opt.textContent = nome;
+        filtroLugar.appendChild(opt);
+      });
+    }
 
     function renderEventos() {
       galeria.innerHTML = '';
       const tipoSelecionado = filtroTipo.value;
       const cidadeSelecionada = filtroCidade.value;
+      const lugarSelecionado = filtroLugar.value;
 
       eventos.forEach((evento, index) => {
         if (
           (tipoSelecionado === "todos" || evento.tipo === tipoSelecionado) &&
-          (cidadeSelecionada === "todas" || evento.cidade === cidadeSelecionada)
+          (cidadeSelecionada === "todas" || evento.cidade === cidadeSelecionada) &&
+          (lugarSelecionado === "todos" || evento.nome === lugarSelecionado)
         ) {
           const card = document.createElement("div");
           card.classList.add("evento");
@@ -392,7 +394,9 @@
 
     filtroTipo.addEventListener("change", renderEventos);
     filtroCidade.addEventListener("change", renderEventos);
+    filtroLugar.addEventListener("change", renderEventos);
 
+    popularFiltroLugar();
     renderEventos();
   </script>
 
